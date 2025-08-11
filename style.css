@@ -13,6 +13,32 @@ body {
     background-color: #e8dffb;
 }
 
+/* ####error message###### */
+.text-input {
+    border: 2px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.error {
+    border-color: red;
+    background-color: #ffe6e6;
+}
+
+.valid {
+    border-color: green;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 0px;
+    display: none;
+    /* hidden by default */
+}
+
 .form-wrapper {
     background-color: white;
     padding: 60px 100px;
@@ -24,6 +50,15 @@ body {
 .form-content {
     display: flex;
     flex-direction: column;
+}
+
+.error {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}
+
+.isvalid {
+    border: 2px solid green;
 }
 
 

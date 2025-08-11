@@ -15,24 +15,32 @@
                 <label class="username " for="username">First Name</label>
                 <input type="firstName" name="firstName" class="text-input" id="firstName"
                     placeholder="Enter your firstName">
+                <div id="error-text" class="error-message">First name must contain only alphabets.</div>
             </div>
             <div class="text lastName">
                 <label class="username " for="lastName">Last Name</label>
                 <input type="lastName" name="lastName" class="text-input" id="lastName"
                     placeholder="Enter your lastName">
+                <div id="lastName-error" class="error-message">Last name must contain only alphabets.</div>
             </div>
             <div class="text Address">
-                <label class="username " for="Address">Address</label>
-                <input type="Address" name="Address" class="text-input" id="Address" placeholder="Enter your Address">
+                <label class="username" for="Address">Address</label>
+                <input type="text" name="Address" class="text-input" id="Address" placeholder="Enter your Address">
+                <div id="Address-error" class="error-message" style="display:none;">This field cannot be empty.</div>
             </div>
             <div class="text Phone">
                 <label class="username" for="Phone">Phone</label>
-                <input type="Phone" name="Address" class="text-input" id="Phone" placeholder="Enter your Phone-No">
+                <input type="text" name="Phone" class="text-input" id="Phone" placeholder="Enter your Phone-No">
+                <div id="Phone-error" class="error-message" style="display:none;">Phone No must contain only +92 at
+                    start.
+                </div>
             </div>
             <div class="text username">
                 <label class="username " for="username">Username</label>
                 <input type="username" name="username" class="text-input" id="username" placeholder="Enter your name">
+                <div id="username-error" class="error-message" style="display:none;">Only letters are allowed.</div>
             </div>
+
             <div class="text password">
                 <label for="passwor">Password</label>
                 <input type="password" name="password" class="text-input" id="password"
@@ -41,9 +49,11 @@
             </div>
             <div class="text confirm-password">
                 <label for="confirm-password"> Confirm Password</label>
-                <input type="confirmpassword" class="text-input" name="confirmpassword" id="confirmpassword"
+                <input type="password" class="text-input" name="confirmpassword" id="confirmPassword"
                     placeholder="type your password again">
+                <p id="message" style="color:red;"></p>
             </div>
+
             <div class="remember-me">
                 <label for="remember-me">
                     <input type="checkbox" class="rememberMe-chkbox" name="remember Me" id="remember Me">
@@ -91,6 +101,7 @@
             </div>
     </div>
     </form>
+    <script src="./script.js"></script>
 
 
 </body>
