@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    background-color: #e8dffb;
+}
+
+.form-wrapper {
+    background-color: white;
+    padding: 60px 100px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.05);
+    width: 700px;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.text {
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0%;
+    color: #666;
+
+}
+
+.helping-text-user {
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0%;
+    line-height: 18px;
+
+}
+
+.text-input {
+    width: 500px;
+    height: 56px;
+    border-radius: 8px;
+    border: 1px solid #cccc;
+    padding: 10px;
+
+}
+
+.form-container {
+    flex-direction: column;
+    height: 375px;
+    width: 530px;
+}
+
+.username {
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0%;
+    color: #666;
+
+}
+
+.rememberMe-chkbox {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #666;
+    border-radius: 8px;
+}
+
+.remember-me label {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    /* vertical alignment */
+    gap: 8px;
+    /* space between checkbox and text */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.rememberMe-chkbox {
+    width: 18px;
+    height: 18px;
+}
+
+.radio-btns {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.circle-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Hide default checkbox */
+.circle-checkbox input {
+    display: none;
+}
+
+/* Outer circle */
+.custom-circle {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #666;
+    border-radius: 50%;
+    /* Makes the shape circular */
+    position: relative;
+}
+
+/* Inner circle appears when checked */
+.circle-checkbox input:checked+.custom-circle::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #7A5CFA;
+    border-radius: 50%;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+
+.label-text {
+    color: #666666;
+}
+
+.dropdown {
+    display: flex;
+    height: 40px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    color: #666;
+    padding: 10px;
+
+}
+
+select {
+    border: 1px solid #ccc;
+    color: white;
+}
+
+option {
+    select {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 2px solid #8a5fff;
+        cursor: pointer;
+    }
+}
+
+option:hover {
+    background-color: #8a5fff;
+    /* Purple */
+    color: white
+}
+
+
+.dropdown-label {
+    color: #666;
+    font-size: 12px;
+    font-weight: 600;
+    column-gap: 10px;
+
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Cancel button */
+.btn-cancel {
+    border: 2px solid #8a5fff;
+    background: transparent;
+    color: #8a5fff;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Next button */
+.btn-next {
+    border: none;
+    background: #8a5fff;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Hover effects */
+.btn-cancel:hover {
+    background: #f2e9ff;
+}
+
+.btn-next:hover {
+    background: #7a4fe0;
+}
