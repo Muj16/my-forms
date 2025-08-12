@@ -9,7 +9,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 100vh; */
     background-color: #e8dffb;
 }
 
@@ -24,7 +23,6 @@ body {
 
 .error {
     border-color: red;
-    background-color: #ffe6e6;
 }
 
 .valid {
@@ -33,7 +31,7 @@ body {
 
 .error-message {
     color: red;
-    font-size: 12px;
+    font-size: 10px;
     margin-top: 0px;
     display: none;
     /* hidden by default */
@@ -51,17 +49,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
-.error {
-    border: 2px solid red;
-    background-color: #ffe6e6;
-}
-
-.isvalid {
-    border: 2px solid green;
-}
-
-
 
 .text {
     margin-bottom: 22px;
@@ -236,7 +223,7 @@ option:hover {
 }
 
 /* Next button */
-.btn-next {
+.btn-submit {
     border: none;
     background: #8a5fff;
     color: white;
