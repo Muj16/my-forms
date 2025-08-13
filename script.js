@@ -226,7 +226,6 @@ form.addEventListener("submit", function (e) {
     }
     else {
         passwordError.style.display = "none";
-        alert("Form submitted successfully!"); // You can replace with actual submission
     }
 
     // Stop form from saving if any error
