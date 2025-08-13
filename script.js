@@ -38,22 +38,57 @@ lastNameField.addEventListener("input", function () {
 });
 
 const phoneField = document.getElementById("Phone");
-const phoneError = document.getElementById("Phone-error");
+const phoneError = document.getElementById("phone-error");
 
-// Allow: +92XXXXXXXXXX or 03XXXXXXXXX or 3XXXXXXXXX (Pakistan)
-const phonePattern = /^(\+92)?[0-9]{10}$/;
+function formatPhone(input) {
+    // Remove everything except digits
+    let numbers = input.replace(/\D/g, "");
 
-phoneField.addEventListener("input", function () {
-    let phone = phoneField.value.trim();
+    // Remove leading 92 if already in digits
+    if (numbers.startsWith("92")) {
+        numbers = numbers.slice(2);
+    }
 
-    if (phonePattern.test(phone)) {
-        phoneField.classList.remove("error");
-        phoneError.style.display = "none"; // hide error text
-    } else {
-        phoneField.classList.add("error");
-        phoneError.style.display = "block"; // show error text
+    // Force starting digit to be 3 for Pakistani mobile
+    if (!numbers.startsWith("3")) {
+        numbers = "3" + numbers.replace(/^./, "");
+    }
+
+    // Limit to 10 digits
+    numbers = numbers.slice(0, 10);
+
+    // Apply mask: 3xx-xxxxxxx
+    let formatted = "";
+    if (numbers.length > 0) {
+        formatted = numbers.substring(0, 3); // 3xx
+    }
+    if (numbers.length > 3) {
+        formatted += "-" + numbers.substring(3);
+    }
+
+    return "+92 " + formatted;
+}
+
+// Ensure +92 is always there when focusing
+phoneField.addEventListener("focus", function () {
+    if (!phoneField.value.startsWith("+92")) {
+        phoneField.value = "+92 3";
     }
 });
+
+// Apply mask while typing
+phoneField.addEventListener("input", function () {
+    phoneField.value = formatPhone(phoneField.value);
+
+    // Show error if not complete
+    let rawDigits = phoneField.value.replace(/\D/g, "").slice(2); // after 92
+    if (rawDigits.length < 10) {
+        phoneError.style.display = "block";
+    } else {
+        phoneError.style.display = "none";
+    }
+});
+
 const addressField = document.getElementById("Address");
 const addressError = document.getElementById("Address-error");
 
@@ -84,24 +119,19 @@ usernameField.addEventListener("input", function () {
         usernameError.style.display = "none"; // Hide error
     }
 });
-const passwordField = document.getElementById("password");
-const passwordError = document.getElementById("password-error");
-
-passwordField.addEventListener("input", function () {
-    let password = passwordField.value.trim();
-
-    if (password.length > 8) {
-        passwordField.classList.add("error");
-        passwordError.style.display = "block"; // Show error
-    } else {
-        passwordField.classList.remove("error");
-        passwordError.style.display = "none"; // Hide error
-    }
-});
 const password = document.getElementById("password");
+const passwordError = document.getElementById("password-error");
 const confirmPassword = document.getElementById("confirmPassword");
 const message = document.getElementById("message");
-
+password.addEventListener("input", function () {
+    if (password.value.length < 8) {
+        passwordError.style.display = "block";
+        password.classList.add("error"); // Optional red border
+    } else {
+        passwordError.style.display = "none";
+        password.classList.remove("error");
+    }
+});
 confirmPassword.addEventListener("input", function () {
     if (confirmPassword.value === password.value) {
         message.textContent = "Password matches ✅";
@@ -140,9 +170,11 @@ form.addEventListener("submit", function (e) {
     }
 });
 
+
 form.addEventListener("submit", function (e) {
     e.preventDefault();
     let isValid = true;
+    const pakistaniPattern = /^\+92[3][0-9]{2}-[0-9]{7}$/
 
 
     // First Name
@@ -160,10 +192,13 @@ form.addEventListener("submit", function (e) {
     }
 
     // Phone
-    if (!phonePattern.test(phoneField.value.trim())) {
+    if (!pakistaniPattern.test(phoneField.value)) {
         phoneField.classList.add("error");
         phoneError.style.display = "block";
-        isValid = false;
+        phoneField.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else {
+        phoneField.classList.remove("error");
+        phoneError.style.display = "none";
     }
 
     // Address
@@ -181,18 +216,18 @@ form.addEventListener("submit", function (e) {
     }
 
     // Password
-    if (passwordField.value.trim().length > 13) {
-        passwordField.classList.add("error");
-        // passwordError.style.display = "block";
-        isValid = false;
+    let password = passwordField.value.trim();
+    if (password === "") {
+        passwordError.textContent = "Password cannot be empty.";
+        passwordError.style.display = "block";
     }
-
-    // Confirm Password
-    if (passwordField.value.trim() !== confirmPassword.value.trim()) {
-        confirmPassword.classList.add("error");
-        message.textContent = "Passwords do not match ❌";
-        message.style.color = "red";
-        isValid = false;
+    else if (password.length > 9) {
+        passwordError.textContent = "Password must not be more than 9 characters.";
+        passwordError.style.display = "block";
+    }
+    else {
+        passwordError.style.display = "none";
+        alert("Form submitted successfully!"); // You can replace with actual submission
     }
 
     // Stop form from saving if any error
@@ -230,7 +265,7 @@ form.addEventListener("submit", function (e) {
     if (!phoneField()) isValid = true;
     if (!passwordField()) isValid = true;
     if (!addressField()) isValid = true;
-    if (!isValid) {
+    if (isValid) {
         scrollToFirstError();
     } else {
         alert("Form submitted successfully ✅");

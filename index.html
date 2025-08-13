@@ -30,9 +30,8 @@
             </div>
             <div class="text Phone">
                 <label class="username" for="Phone">Phone</label>
-                <input type="Tel" name="Phone" value="+92" maxlength="13" class="text-input" id="Phone"
-                    placeholder="Enter your Phone-No">
-                <div id="Phone-error" class="error-message" style="display:none;">
+                <input type="Tel" class="text-input" id="Phone" placeholder="+92xxxxxxxxxx">
+                <div id="phone-error" class="error-message">
                 </div>
             </div>
             <div class="text username">
@@ -43,12 +42,13 @@
 
             <div class="text password">
                 <label for="Password">Password</label>
-                <input type="password" id="password" class="text-input" maxlength="8" placeholder="Enter password">
-                <div class="helping-text-user">Password should be between 8 characters</div>
+                <input type="password" id="password" class="text-input" placeholder="Enter password">
+                <div id="password-error" style="color: red; display: none;">Password must be atleast 8 characters.
+                </div>
             </div>
             <div class="text confirm-password">
                 <label for="confirm-password"> Confirm Password</label>
-                <input type="password" class="text-input" name="confirmpassword" maxlength="8" id="confirmPassword"
+                <input type="password" class="text-input" name="confirmpassword" id="confirmPassword"
                     placeholder="type your password again">
                 <p id="message" style="color:red;"></p>
 
@@ -59,6 +59,9 @@
                     <input type="checkbox" class="rememberMe-chkbox" name="remember Me" id="remember-Me">
                     <span class="label-text">Please tick the box to agree with terms and conditions.</span>
                 </label>
+                <div id="checkbox-error" style="color: red; display: none;">
+                    You must agree with the terms and conditions.
+                </div>
             </div>
             <!-- Radio Button 1 -->
             <div class="radio-btns">
