@@ -216,13 +216,12 @@ form.addEventListener("submit", function (e) {
     }
 
     // Password
-    let password = passwordField.value.trim();
     if (password === "") {
         passwordError.textContent = "Password cannot be empty.";
         passwordError.style.display = "block";
     }
-    else if (password.length > 9) {
-        passwordError.textContent = "Password must not be more than 9 characters.";
+    else if (password.length > 8) {
+        passwordError.textContent = "Password must not be more than 8 characters.";
         passwordError.style.display = "block";
     }
     else {
