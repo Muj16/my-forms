@@ -212,7 +212,7 @@ option:hover {
 }
 
 /* Cancel button */
-.btn-cancel {
+#backBtn {
     border: 2px solid #8a5fff;
     background: transparent;
     color: #8a5fff;
@@ -224,6 +224,16 @@ option:hover {
 
 /* Next button */
 .btn-submit {
+    border: none;
+    background: #8a5fff;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#nextBtn {
     border: none;
     background: #8a5fff;
     color: white;

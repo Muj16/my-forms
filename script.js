@@ -1,16 +1,20 @@
-const form = document.getElementById("myform");
-
 // Patterns
-const namePattern = /^[A-Za-z\s]+$/; // letters & spaces
-const usernamePattern = /^[A-Za-z0-9_.]+$/; // letters, numbers, _ and .
+const namePattern = /^[A-Za-z\s]+$/;
+const usernamePattern = /^[A-Za-z0-9_.]+$/;
 const pakistaniPattern = /^\+92\s3[0-9]{2}-[0-9]{7}$/;
 
+// Forms
+const formStep1 = document.getElementById("form-step1");
+const formStep2 = document.getElementById("form-step2");
+const backBtn = document.getElementById("backBtn");
 
-// Fields
+// Fields (Step 1)
 const firstName = document.getElementById("firstName");
 const lastName = document.getElementById("lastName");
 const address = document.getElementById("Address");
 const phone = document.getElementById("Phone");
+
+// Fields (Step 2)
 const username = document.getElementById("username");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
@@ -46,116 +50,107 @@ phone.addEventListener("input", () => {
     phone.value = formatPhone(phone.value);
 });
 
-// Form submit
-form.addEventListener("submit", function (e) {
+// STEP 1 validation
+formStep1.addEventListener("submit", function (e) {
     e.preventDefault();
-    let isValid = true;
+    let valid = true;
 
-    // First name
     if (!namePattern.test(firstName.value.trim())) {
         firstNameError.style.display = "block";
-        firstName.classList.add("error");
-        isValid = false;
+        valid = false;
     } else {
         firstNameError.style.display = "none";
-        firstName.classList.remove("error");
     }
 
-    // Last name
     if (!namePattern.test(lastName.value.trim())) {
         lastNameError.style.display = "block";
-        lastName.classList.add("error");
-        isValid = false;
+        valid = false;
     } else {
         lastNameError.style.display = "none";
-        lastName.classList.remove("error");
     }
 
-    // Address
     if (address.value.trim() === "") {
         addressError.style.display = "block";
-        address.classList.add("error");
-        isValid = false;
+        valid = false;
     } else {
         addressError.style.display = "none";
-        address.classList.remove("error");
     }
 
-    // Phone
     if (!pakistaniPattern.test(phone.value)) {
         phoneError.textContent = "Enter valid phone: +92 3xx-xxxxxxx";
         phoneError.style.display = "block";
-        phone.classList.add("error");
-        isValid = false;
+        valid = false;
     } else {
         phoneError.style.display = "none";
-        phone.classList.remove("error");
     }
 
-    // Username
+    if (valid) {
+        formStep1.style.display = "none";
+        formStep2.style.display = "block";
+    }
+});
+
+// STEP 2 validation
+formStep2.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let valid = true;
+
     if (!usernamePattern.test(username.value.trim())) {
         usernameError.style.display = "block";
-        username.classList.add("error");
-        isValid = false;
+        valid = false;
     } else {
         usernameError.style.display = "none";
-        username.classList.remove("error");
     }
 
-    // Password
     if (password.value.length < 8) {
         passwordError.style.display = "block";
-        password.classList.add("error");
-        isValid = false;
+        valid = false;
     } else {
         passwordError.style.display = "none";
-        password.classList.remove("error");
     }
 
-    // Confirm password
     if (confirmPassword.value !== password.value || confirmPassword.value === "") {
         confirmMessage.textContent = "Passwords do not match ❌";
         confirmMessage.style.color = "red";
-        isValid = false;
+        valid = false;
     } else {
         confirmMessage.textContent = "Password matches ✅";
         confirmMessage.style.color = "green";
     }
 
-    // Radio
-    const radioChecked = form.querySelector('input[name="choice"]:checked');
+    const radioChecked = formStep2.querySelector('input[name="choice"]:checked');
     if (!radioChecked) {
         radioError.textContent = "Please select an option.";
-        isValid = false;
+        valid = false;
     } else {
         radioError.textContent = "";
     }
 
-    // Dropdown
     if (dropdown.value === "") {
         dropdownError.textContent = "Please select a valid option.";
-        isValid = false;
+        valid = false;
     } else {
         dropdownError.textContent = "";
     }
 
-    // Checkbox
     if (!checkbox.checked) {
         checkboxError.style.display = "block";
-        isValid = false;
+        valid = false;
     } else {
         checkboxError.style.display = "none";
     }
 
-    // Final decision
-    if (isValid) {
+    if (valid) {
         alert("Form submitted successfully ✅");
-        // form.submit(); // Uncomment to actually submit
-    } else {
-        const firstErrorField = form.querySelector(".error");
-        if (firstErrorField) {
-            firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
-            firstErrorField.focus();
-        }
+        formStep2.reset();
+        formStep1.reset();
+        formStep2.style.display = "none";
+        formStep1.style.display = "block";
     }
+});
+
+// Back button
+backBtn.addEventListener("click", function () {
+    formStep2.style.display = "none";
+    formStep1.style.display = "block";
 });
